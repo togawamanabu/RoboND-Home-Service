@@ -1,47 +1,47 @@
 #include <ros/ros.h>
-#include <visualization_msgs/Maker.h>
+#include <visualization_msgs/Marker.h>
 
 int main(int argc, char** argv) {
   ros::init(argc, argv, "add_makers");
   ros::NodeHandle n;
   ros::Rate r(1);
-  ros::Publisher maker_pub = n.advertise<Visualization_msgs::Maker>("visualization_maker", 1);
+  ros::Publisher marker_pub = n.advertise<visualization_msgs::Marker>("visualization_marker", 1);
 
-  unit32_t shape = visualization_msgs::Marker::CUBE;
+  uint32_t shape = visualization_msgs::Marker::CUBE;
 
-  const double pick_pose[3] = {2.0, 30.0, 1.0);
-  const double drop_pose[3] = {-3.0, 0.0, -1.0);
+  const double pick_pose[3] = {2.0, 30.0, 1.0};
+  const double drop_pose[3] = {-3.0, 0.0, -1.0};
 
   visualization_msgs::Marker marker;
 
   marker.header.frame_id = "/map";
   marker.header.stamp = ros::Time::now();
 
-  maker.ns = "basic_shapes";
+  marker.ns = "basic_shapes";
   marker.id = 0;
 
   marker.type = shape;
   marker.action = visualization_msgs::Marker::ADD;
 
-  Marker.pose.position.x = pick_pose[0];
+  marker.pose.position.x = pick_pose[0];
   marker.pose.position.y = pick_pose[1];
   marker.pose.position.z = pick_pose[2];
-  maker.pose.orientation.x = 0;
-  maker.pose.orientation.y = 0;
-  maker.pose.orientation.z = 0;
-  maker.pose.orientation.w = 1.0;
-  maker.scale.x = 1.0;
-  maker.scale.y = 1.0;
-  maker.scale.z = 1.0;
-  maker.color.r = 0.0f;
-  maker.color.g = 1.0f;
-  maker.color.b = 0.0f;
-  maker.color.a = 1.0;
+  marker.pose.orientation.x = 0;
+  marker.pose.orientation.y = 0;
+  marker.pose.orientation.z = 0;
+  marker.pose.orientation.w = 1.0;
+  marker.scale.x = 1.0;
+  marker.scale.y = 1.0;
+  marker.scale.z = 1.0;
+  marker.color.r = 0.0f;
+  marker.color.g = 1.0f;
+  marker.color.b = 0.0f;
+  marker.color.a = 1.0;
 
-  maker.lifetime = ros::Duration();
+  marker.lifetime = ros::Duration();
 
   //publich the marker
-  while (marker_pub.getNumSuscribers() < 1) {
+  while (marker_pub.getNumSubscribers() < 1) {
     if(!ros::ok()) {
       return 0;
     }
@@ -50,7 +50,7 @@ int main(int argc, char** argv) {
   }
 
   ROS_INFO("Publishing marker pick position");
-  maker_pub.publish(marker);
+  marker_pub.publish(marker);
   ros::Duration(5.0).sleep();
 
   marker.action = visualization_msgs::Marker::DELETE;

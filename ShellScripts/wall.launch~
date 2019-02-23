@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+
+<launch>
+
+  <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" output="screen">
+    <param name="maxUrange" value="20" />
+    <param name="maxRange" value="25" />
+    <param name="linearUpdate" value="0.1" />
+    <param name="angularUpdate" value="0.1" />
+    <param name="minimumScore" value="1000" />
+  </node>
+ </launch>

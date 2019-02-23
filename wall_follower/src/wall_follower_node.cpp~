@@ -1,0 +1,56 @@
+#include <iostream>
+#include <cmath>
+#include <algorithm>
+#include <stack>
+
+#include "ros/ros.h"
+#include "geometry_msgs/Twist.h"
+#include "sensor_msgs/LaserScan.h"
+#include "tf/transform_listener.h"
+
+#define LINER_SPEED 0.5
+
+ros::Publisher motor_command_publisher;
+ros::Subscriber laser_subscriber;
+sensor_msgs::LaserScan laser_msg;
+geometry_msgs::Twist motor_command;
+
+typedef enum ROBOT_MOVE {
+  STOP = 0,
+  FORWARD,
+  BACKWARD,
+  TURN_LEFT,
+  TURN_RIGHT,
+  GO_RIGHT,
+  GO_LEFT
+} ROBOT_MOVE;
+
+bool robot_move(const ROBOT_MOVE move) {
+  if (move == STOP) {
+    motor_command.angular.z = 0.0;
+    motor_command.liner.x = 0.0;
+  } else if (move == FORWARD) {
+    motor_command.angular.z = 0.0;
+    motor_command.linear.x = LINER_SPEED;
+  } else if (move == BACKWARD) {
+    motor_command.angular.z = 0.0;
+    motor_command.linear.x = -1 * LINER_SPEED;
+  } else if (move == TURN_LEFT) {
+    motor_command.angular.z = 1.0;
+    motor_command.linear.x = 0.0;
+  } else if (move == TURN_RIGHT) {
+    motor_command.angular.z = -1.0;
+    motor_command.linear.x = 0.0;
+  } else if (move == GO_RIGHT) {
+    motor_command.linear.x = LINER_SPEED;
+    motor_command.angular.z = -0.25;
+  } else if (move == GO_LEFT) {
+    motor_command.angular.z = 0.25;
+    motor_command.linear.x = LINEAR_SPEED;
+  }
+
+  motor_command_publisher.publish(motor_command);
+  usleep(10);
+
+  return true;
+}

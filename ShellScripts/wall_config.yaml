@@ -1,0 +1,8 @@
+Slam_gmapping: {
+angularUpdate: 0.1,
+linearUpdate: 0.1,
+maxRange: 15.0,
+maxUrange: 10.0,
+minimumScore: 1000,
+particles: 300,
+}

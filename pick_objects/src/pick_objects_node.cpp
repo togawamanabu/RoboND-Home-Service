@@ -42,7 +42,7 @@ int main(int argc, char** argv) {
   ROS_INFO("Moving to next goal");
   goal.target_pose.header.stamp = ros::Time::now();
   goal.target_pose.pose.position.x = -3.0;
-  goal.target_pose.pose.position.y = 0;
+  goal.target_pose.pose.position.y = 1;
   goal.target_pose.pose.orientation.w = -1.0;
 
   ac.sendGoal(goal);

@@ -1,0 +1,3 @@
+<launch>
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find add_makers)/config/add_markers.rviz" />
+</launch>
